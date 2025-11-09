@@ -508,7 +508,7 @@ function showComparison() {
             </div>
 
             <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; border: 2px solid #e2e8f0;">
-                <h4 style="color: #2d3748; margin-bottom: 15px;">💡 Comparison Insights</h4>
+                <h4 style="color: #2d3748; margin-bottom: 15px;"> Comparison Insights</h4>
                 <ul style="color: #4a5568; line-height: 1.8; padding-left: 20px;">
                     <li>Shorter loan periods have higher monthly payments but lower total interest</li>
                     <li>3-year plan saves you ${formatCurrency(interest5 - interest3)} compared to 5-year plan</li>

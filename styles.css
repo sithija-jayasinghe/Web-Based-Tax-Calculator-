@@ -76,9 +76,15 @@ body {
    MAIN CONTENT AREA
    ============================================ */
 
-.main-content {
+.content-area {
     margin-left: 280px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex-grow: 1;
     padding: 40px 60px;
 }
 
@@ -312,39 +318,93 @@ select:focus {
 }
 
 /* ============================================
+
    RESPONSIVE DESIGN
+
    ============================================ */
 
+
+
 @media (max-width: 768px) {
+
     .sidebar {
+
         width: 100%;
+
         height: auto;
+
         position: relative;
+
     }
+
+
+
+    .content-area {
+
+        margin-left: 0;
+
+    }
+
+
 
     .main-content {
-        margin-left: 0;
+
         padding: 20px;
+
     }
+
+
 
     .header h1 {
+
         font-size: 24px;
+
     }
+
+
 
     .header h2 {
+
         font-size: 18px;
+
     }
+
+
 
     .calculator-card {
+
         padding: 20px;
+
     }
+
+
 
     .radio-group {
+
         flex-direction: column;
+
     }
 
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
+
+
+        .btn {
+
+
+
+            width: 100%;
+
+
+
+            margin-bottom: 10px;
+
+
+
+        }
+
+
+
     }
-}
+
+
+
+    
