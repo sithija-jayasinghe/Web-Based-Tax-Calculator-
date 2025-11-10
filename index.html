@@ -10,8 +10,15 @@
     <div class="sidebar">
         <div class="logo">TaxCalc LK</div>
         
+        <div class="theme-toggle">
+            <button id="themeToggle" onclick="toggleTheme()">
+                <span class="theme-icon">🌙</span>
+                <span class="theme-text">Dark Mode</span>
+            </button>
+        </div>
+        
         <div class="menu-section">
-            <div class="section-title">TAX CALCULATORS</div>
+            <div class="section-title">📊 TAX CALCULATORS</div>
             <div class="menu-item active" onclick="showCalculator('withholding')">
                 📄 Withholding Tax
             </div>
@@ -30,138 +37,137 @@
         </div>
     </div>
 
-    <div class="content-area">
-        <div class="main-content">
-            <div class="header">
-                <h1>Tax Calculator</h1>
-                <h2>Calculate Tax on Your Income & Transactions</h2>
-                <p>Calculate the taxable amount for income earned, considering the revised tax rates given by ICET</p>
-            </div>
+    <div class="main-content">
+        <div class="header">
+            <h1>Tax Calculator </h1>
+            <h2>Calculate Tax on Your Income & Transactions</h2>
+            <p>Calculate the taxable amount for income earned, considering the revised tax rates by ICET</p>
+        </div>
 
-            <!-- Withholding Tax Calculator -->
-            <div id="withholding" class="calculator-card active">
-                <h2 class="card-title">Withholding Tax Calculator</h2>
-                
-                <div class="form-group">
-                    <label>Select Tax Type</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="rent" name="taxType" value="rent" checked>
-                            <label for="rent" style="margin: 0;">Rent Tax (10% above Rs. 100,000)</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="interest" name="taxType" value="interest">
-                            <label for="interest" style="margin: 0;">Bank Interest Tax (5%)</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="dividend" name="taxType" value="dividend">
-                            <label for="dividend" style="margin: 0;">Dividend Tax (14% above Rs. 100,000)</label>
-                        </div>
+        <!-- Withholding Tax Calculator -->
+        <div id="withholding" class="calculator-card active">
+            <h2 class="card-title">Withholding Tax Calculator</h2>
+            
+            <div class="form-group">
+                <label>Select Tax Type</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="rent" name="taxType" value="rent" checked>
+                        <label for="rent" style="margin: 0;">Rent Tax (10% above Rs. 100,000)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="interest" name="taxType" value="interest">
+                        <label for="interest" style="margin: 0;">Bank Interest Tax (5%)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="dividend" name="taxType" value="dividend">
+                        <label for="dividend" style="margin: 0;">Dividend Tax (14% above Rs. 100,000)</label>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Amount (LKR)</label>
-                    <input type="number" id="whtAmount" placeholder="Enter amount" min="0">
-                    <div id="whtError" class="error"></div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary" onclick="calculateWithholding()">Calculate Tax</button>
-                    <button class="btn btn-secondary" onclick="resetWithholding()">Reset</button>
-                </div>
-
-                <div id="whtResults"></div>
             </div>
 
-            <!-- Payable Tax Calculator -->
-            <div id="payable" class="calculator-card">
-                <h2 class="card-title">Payable Tax Calculator (Monthly Salary)</h2>
-                
-                <div class="form-group">
-                    <label>Monthly Salary (LKR)</label>
-                    <input type="number" id="monthlySalary" placeholder="Enter your monthly salary" min="0">
-                    <div id="payableError" class="error"></div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary" onclick="calculatePayable()">Calculate Tax</button>
-                    <button class="btn btn-secondary" onclick="resetPayable()">Reset</button>
-                </div>
-
-                <div id="payableResults"></div>
+            <div class="form-group">
+                <label>Amount (LKR)</label>
+                <input type="number" id="whtAmount" placeholder="Enter amount" min="0">
+                <div id="whtError" class="error"></div>
             </div>
 
-            <!-- Income Tax Calculator -->
-            <div id="income" class="calculator-card">
-                <h2 class="card-title">Income Tax Calculator (Annual)</h2>
-                
-                <div class="form-group">
-                    <label>Annual Income (LKR)</label>
-                    <input type="number" id="annualIncome" placeholder="Enter your annual income" min="0">
-                    <div id="incomeError" class="error"></div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary" onclick="calculateIncome()">Calculate Tax</button>
-                    <button class="btn btn-secondary" onclick="resetIncome()">Reset</button>
-                </div>
-
-                <div id="incomeResults"></div>
+            <div>
+                <button class="btn btn-primary" onclick="calculateWithholding()">Calculate Tax</button>
+                <button class="btn btn-secondary" onclick="resetWithholding()">Reset</button>
             </div>
 
-            <!-- SSCL Tax Calculator -->
-            <div id="sscl" class="calculator-card">
-                <h2 class="card-title">SSCL Tax Calculator</h2>
-                
-                <div class="form-group">
-                    <label>Transaction Value (LKR)</label>
-                    <input type="number" id="ssclValue" placeholder="Enter transaction value" min="0">
-                    <div id="ssclError" class="error"></div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary" onclick="calculateSSCL()">Calculate SSCL</button>
-                    <button class="btn btn-secondary" onclick="resetSSCL()">Reset</button>
-                </div>
-
-                <div id="ssclResults"></div>
-            </div>
-
-            <!-- Leasing Calculator -->
-            <div id="leasing" class="calculator-card">
-                <h2 class="card-title">Leasing Calculator</h2>
-                
-                <div class="form-group">
-                    <label>Loan Amount (LKR)</label>
-                    <input type="number" id="loanAmount" placeholder="Enter loan amount" min="0">
-                </div>
-
-                <div class="form-group">
-                    <label>Annual Interest Rate (%)</label>
-                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="0" step="0.1">
-                </div>
-
-                <div class="form-group">
-                    <label>Loan Period (Years)</label>
-                    <select id="loanYears">
-                        <option value="3">3 Years</option>
-                        <option value="4">4 Years</option>
-                        <option value="5">5 Years</option>
-                    </select>
-                </div>
-
-                <div id="leasingError" class="error"></div>
-
-                <div>
-                    <button class="btn btn-primary" onclick="calculateLeasing()">Calculate EMI</button>
-                    <button class="btn btn-primary" onclick="showComparison()">Compare Plans</button>
-                    <button class="btn btn-secondary" onclick="resetLeasing()">Reset</button>
-                </div>
-
-                <div id="leasingResults"></div>
-            </div>
+            <div id="whtResults"></div>
         </div>
+
+        <!-- Payable Tax Calculator -->
+        <div id="payable" class="calculator-card">
+            <h2 class="card-title">Payable Tax Calculator (Monthly Salary)</h2>
+            
+            <div class="form-group">
+                <label>Monthly Salary (LKR)</label>
+                <input type="number" id="monthlySalary" placeholder="Enter your monthly salary" min="0">
+                <div id="payableError" class="error"></div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculatePayable()">Calculate Tax</button>
+                <button class="btn btn-secondary" onclick="resetPayable()">Reset</button>
+            </div>
+
+            <div id="payableResults"></div>
+        </div>
+
+        <!-- Income Tax Calculator -->
+        <div id="income" class="calculator-card">
+            <h2 class="card-title">Income Tax Calculator (Annual)</h2>
+            
+            <div class="form-group">
+                <label>Annual Income (LKR)</label>
+                <input type="number" id="annualIncome" placeholder="Enter your annual income" min="0">
+                <div id="incomeError" class="error"></div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateIncome()">Calculate Tax</button>
+                <button class="btn btn-secondary" onclick="resetIncome()">Reset</button>
+            </div>
+
+            <div id="incomeResults"></div>
+        </div>
+
+        <!-- SSCL Tax Calculator -->
+        <div id="sscl" class="calculator-card">
+            <h2 class="card-title">SSCL Tax Calculator</h2>
+            
+            <div class="form-group">
+                <label>Transaction Value (LKR)</label>
+                <input type="number" id="ssclValue" placeholder="Enter transaction value" min="0">
+                <div id="ssclError" class="error"></div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateSSCL()">Calculate SSCL</button>
+                <button class="btn btn-secondary" onclick="resetSSCL()">Reset</button>
+            </div>
+
+            <div id="ssclResults"></div>
+        </div>
+
+        <!-- Leasing Calculator -->
+        <div id="leasing" class="calculator-card">
+            <h2 class="card-title">Leasing Calculator</h2>
+            
+            <div class="form-group">
+                <label>Loan Amount (LKR)</label>
+                <input type="number" id="loanAmount" placeholder="Enter loan amount" min="0">
+            </div>
+
+            <div class="form-group">
+                <label>Annual Interest Rate (%)</label>
+                <input type="number" id="interestRate" placeholder="Enter interest rate" min="0" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label>Loan Period (Years)</label>
+                <select id="loanYears">
+                    <option value="3">3 Years</option>
+                    <option value="4">4 Years</option>
+                    <option value="5">5 Years</option>
+                </select>
+            </div>
+
+            <div id="leasingError" class="error"></div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateLeasing()">Calculate EMI</button>
+                <button class="btn btn-primary" onclick="showComparison()">Compare Plans</button>
+                <button class="btn btn-secondary" onclick="resetLeasing()">Reset</button>
+            </div>
+
+            <div id="leasingResults"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

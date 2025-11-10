@@ -9,6 +9,38 @@ function showCalculator(id) {
     event.target.closest('.menu-item').classList.add('active');
 }
 
+function toggleTheme() {
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+    const themeText = themeToggle.querySelector('.theme-text');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark Mode';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+    const themeText = themeToggle.querySelector('.theme-text');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+    }
+});
+
 function formatCurrency(amount) {
     return 'Rs. ' + amount.toLocaleString('en-LK', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
@@ -508,7 +540,7 @@ function showComparison() {
             </div>
 
             <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; border: 2px solid #e2e8f0;">
-                <h4 style="color: #2d3748; margin-bottom: 15px;"> Comparison Insights</h4>
+                <h4 style="color: #2d3748; margin-bottom: 15px;">💡 Comparison Insights</h4>
                 <ul style="color: #4a5568; line-height: 1.8; padding-left: 20px;">
                     <li>Shorter loan periods have higher monthly payments but lower total interest</li>
                     <li>3-year plan saves you ${formatCurrency(interest5 - interest3)} compared to 5-year plan</li>
