@@ -9,37 +9,7 @@ function showCalculator(id) {
     event.target.closest('.menu-item').classList.add('active');
 }
 
-function toggleTheme() {
-    const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
-    const themeText = themeToggle.querySelector('.theme-text');
-    
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'Light Mode';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        themeIcon.textContent = '🌙';
-        themeText.textContent = 'Dark Mode';
-        localStorage.setItem('theme', 'light');
-    }
-}
 
-window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
-    const themeText = themeToggle.querySelector('.theme-text');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'Light Mode';
-    }
-});
 
 function formatCurrency(amount) {
     return 'Rs. ' + amount.toLocaleString('en-LK', {minimumFractionDigits: 2, maximumFractionDigits: 2});

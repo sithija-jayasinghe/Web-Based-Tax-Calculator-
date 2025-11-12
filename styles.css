@@ -9,13 +9,6 @@ body {
     background: #f5f7fa;
     display: flex;
     min-height: 100vh;
-    transition: background-color 0.3s ease;
-}
-
-body.dark-mode {
-    background: linear-gradient(180deg, #071129 0%, #081428 100%);
-    color: #e6eef8;
-    -webkit-font-smoothing: antialiased;
 }
 
 .sidebar {
@@ -26,12 +19,6 @@ body.dark-mode {
     position: fixed;
     height: 100vh;
     overflow-y: auto;
-    transition: background-color 0.3s ease;
-}
-
-body.dark-mode .sidebar {
-    background: linear-gradient(180deg, #07132a 0%, #0b2238 100%);
-    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
 }
 
 .logo {
@@ -40,43 +27,6 @@ body.dark-mode .sidebar {
     font-weight: bold;
     color: white;
     margin-bottom: 20px;
-}
-
-.theme-toggle {
-    padding: 0 30px;
-    margin-bottom: 20px;
-}
-
-.theme-toggle button {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 107, 53, 0.1);
-    border: 2px solid #ff6b35;
-    border-radius: 8px;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.theme-toggle button:hover {
-    background: #ff6b35;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
-}
-
-.theme-icon {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-
-.theme-toggle button:hover .theme-icon {
-    transform: rotate(20deg);
 }
 
 .menu-section {
@@ -118,11 +68,6 @@ body.dark-mode .sidebar {
     margin-left: 280px;
     flex: 1;
     padding: 40px 60px;
-    transition: background-color 0.3s ease;
-}
-
-body.dark-mode .main-content {
-    background: linear-gradient(180deg, rgba(10,18,34,0.25), rgba(7,18,38,0.15));
 }
 
 .header {
@@ -134,22 +79,12 @@ body.dark-mode .main-content {
     font-size: 36px;
     color: #0a1128;
     margin-bottom: 15px;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .header h1 {
-    color: #ffffff;
 }
 
 .header h2 {
     font-size: 24px;
     color: #2d3748;
     margin-bottom: 10px;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .header h2 {
-    color: #e2e8f0;
 }
 
 .header p {
@@ -157,11 +92,6 @@ body.dark-mode .header h2 {
     font-size: 16px;
     max-width: 800px;
     margin: 0 auto;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .header p {
-    color: #a0aec0;
 }
 
 .calculator-card {
@@ -171,12 +101,6 @@ body.dark-mode .header p {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     margin-bottom: 30px;
     display: none;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .calculator-card {
-    background: #0f3460;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .calculator-card.active {
@@ -189,73 +113,6 @@ body.dark-mode .calculator-card {
     color: #0a1128;
     margin-bottom: 30px;
     text-align: center;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .card-title {
-    color: #ffffff;
-}
-
-body.dark-mode input[type="number"],
-body.dark-mode select {
-    background: rgba(255,255,255,0.03);
-    border-color: rgba(255,255,255,0.06);
-    color: #e6eef8;
-}
-
-body.dark-mode input[type="number"]::placeholder,
-body.dark-mode select::-ms-expand {
-    color: #9aa7bf;
-}
-
-body.dark-mode .calculator-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255,255,255,0.04);
-    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-    backdrop-filter: blur(6px);
-}
-
-body.dark-mode .comparison-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-color: rgba(255,255,255,0.04);
-}
-
-body.dark-mode label,
-body.dark-mode .header p,
-body.dark-mode .result-label,
-body.dark-mode .comparison-card h3 {
-    color: #bcd0e6;
-}
-
-body.dark-mode .theme-toggle button {
-    background: rgba(255,107,53,0.08);
-    border-color: rgba(255,107,53,0.35);
-    color: #fff;
-}
-
-body.dark-mode .btn-primary {
-    background: #ff7a3d;
-    color: #0b1020;
-    box-shadow: 0 10px 30px rgba(255,122,61,0.12);
-}
-
-body.dark-mode .btn-primary:hover {
-    background: #ff6b35;
-}
-
-body.dark-mode .btn-secondary {
-    background: rgba(255,255,255,0.03);
-    color: #cbd5e0;
-    border: 1px solid rgba(255,255,255,0.03);
-}
-
-body.dark-mode .results {
-    background: rgba(255,255,255,0.02);
-    border-left-color: rgba(255,107,53,0.8);
-}
-
-body.dark-mode .result-row:last-child {
-    color: #e6eef8;
 }
 
 .form-group {
@@ -268,11 +125,6 @@ label {
     color: #2d3748;
     margin-bottom: 8px;
     font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode label {
-    color: #e2e8f0;
 }
 
 input[type="number"],
@@ -282,28 +134,14 @@ select {
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 15px;
-    transition: all 0.3s ease;
     background: white;
     color: #2d3748;
-}
-
-body.dark-mode input[type="number"],
-body.dark-mode select {
-    background: #16213e;
-    border-color: #2d4a6e;
-    color: #ffffff;
 }
 
 input[type="number"]:focus,
 select:focus {
     outline: none;
     border-color: #ff6b35;
-}
-
-body.dark-mode input[type="number"]:focus,
-body.dark-mode select:focus {
-    border-color: #ff6b35;
-    background: #1a2a4a;
 }
 
 .radio-group {
@@ -361,11 +199,6 @@ body.dark-mode select:focus {
     background: #f7fafc;
     border-radius: 8px;
     border-left: 4px solid #ff6b35;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .results {
-    background: #16213e;
 }
 
 .result-row {
@@ -373,11 +206,6 @@ body.dark-mode .results {
     justify-content: space-between;
     padding: 15px 0;
     border-bottom: 1px solid #e2e8f0;
-    transition: border-color 0.3s ease;
-}
-
-body.dark-mode .result-row {
-    border-bottom-color: #2d4a6e;
 }
 
 .result-row:last-child {
@@ -385,31 +213,16 @@ body.dark-mode .result-row {
     font-weight: 700;
     font-size: 18px;
     color: #0a1128;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .result-row:last-child {
-    color: #ffffff;
 }
 
 .result-label {
     color: #4a5568;
     font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .result-label {
-    color: #a0aec0;
 }
 
 .result-value {
     color: #2d3748;
     font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .result-value {
-    color: #e2e8f0;
 }
 
 .error {
@@ -435,17 +248,6 @@ body.dark-mode .result-value {
     background: #edf2f7;
     font-weight: 600;
     color: #2d3748;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .breakdown-table th {
-    background: #16213e;
-    color: #e2e8f0;
-}
-
-body.dark-mode .breakdown-table td {
-    color: #e2e8f0;
-    border-bottom-color: #2d4a6e;
 }
 
 .comparison-grid {
@@ -461,22 +263,11 @@ body.dark-mode .breakdown-table td {
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .comparison-card {
-    background: #16213e;
-    border-color: #2d4a6e;
 }
 
 .comparison-card h3 {
     color: #2d3748;
     margin-bottom: 10px;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .comparison-card h3 {
-    color: #e2e8f0;
 }
 
 .comparison-card .amount {
@@ -503,11 +294,6 @@ body.dark-mode .comparison-card h3 {
     .logo {
         padding: 16px 20px;
         font-size: 20px;
-    }
-
-    .theme-toggle {
-        padding: 8px 20px;
-        margin-bottom: 8px;
     }
 
     .menu-section {
