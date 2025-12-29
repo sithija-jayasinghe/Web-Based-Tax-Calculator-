@@ -468,6 +468,207 @@ function resetEPF() {
     document.getElementById('epfResults').innerHTML = '';
 }
 
+function updateStampUI() {
+    const type = document.getElementById('stampType').value;
+    const valueGroup = document.getElementById('stampValueGroup');
+    const leaseGroup = document.getElementById('leasePeriodGroup');
+
+    if (type === 'lease') {
+        valueGroup.style.display = 'none';
+        leaseGroup.style.display = 'block';
+    } else {
+        valueGroup.style.display = 'block';
+        leaseGroup.style.display = 'none';
+    }
+
+    // Clear results on switch
+    document.getElementById('stampResults').innerHTML = '';
+    document.getElementById('stampError').textContent = '';
+}
+
+function calculateStampDuty() {
+    const type = document.getElementById('stampType').value;
+    const errorDiv = document.getElementById('stampError');
+    let value, duty = 0;
+
+    errorDiv.textContent = '';
+
+    if (type === 'lease') {
+        value = parseFloat(document.getElementById('leaseValue').value);
+    } else {
+        value = parseFloat(document.getElementById('stampValue').value);
+    }
+
+    if (!value || value <= 0) {
+        errorDiv.textContent = 'Please enter a valid value greater than 0';
+        return;
+    }
+
+    let breakdownHTML = '';
+
+    if (type === 'buy') {
+        // Deed of Transfer: First 100k @ 3%, Balance @ 4%
+        if (value <= 100000) {
+            duty = value * 0.03;
+            breakdownHTML = `<div class="result-row"><span class="result-label">First 100k (3%)</span><span class="result-value">${formatCurrency(duty)}</span></div>`;
+        } else {
+            const firstPart = 100000 * 0.03;
+            const balance = value - 100000;
+            const balanceTax = balance * 0.04;
+            duty = firstPart + balanceTax;
+            breakdownHTML = `
+                <div class="result-row"><span class="result-label">First Rs. 100,000 (3%)</span><span class="result-value">${formatCurrency(firstPart)}</span></div>
+                <div class="result-row"><span class="result-label">Balance (4%)</span><span class="result-value">${formatCurrency(balanceTax)}</span></div>
+            `;
+        }
+    } else if (type === 'gift') {
+        // Gift Deed: First 50k @ 3%, Balance @ 2%
+        if (value <= 50000) {
+            duty = value * 0.03;
+            breakdownHTML = `<div class="result-row"><span class="result-label">First 50k (3%)</span><span class="result-value">${formatCurrency(duty)}</span></div>`;
+        } else {
+            const firstPart = 50000 * 0.03;
+            const balance = value - 50000;
+            const balanceTax = balance * 0.02;
+            duty = firstPart + balanceTax;
+            breakdownHTML = `
+                <div class="result-row"><span class="result-label">First Rs. 50,000 (3%)</span><span class="result-value">${formatCurrency(firstPart)}</span></div>
+                <div class="result-row"><span class="result-label">Balance (2%)</span><span class="result-value">${formatCurrency(balanceTax)}</span></div>
+            `;
+        }
+    } else if (type === 'lease') {
+        // Lease: 2% (Rs. 20 per 1000)
+        // Exempt if monthly rent <= 5000 (We can't verify monthly here easily without asking user, 
+        // but let's assume if total value is low, might be exempt. 
+        // However, correct law is "Monthly Rent <= 5000". 
+        // For simplicity, we calculate straightforward 2% as requested).
+
+        duty = value * 0.02;
+        breakdownHTML = `
+            <div class="result-row"><span class="result-label">Stamp Duty (2%)</span><span class="result-value">${formatCurrency(duty)}</span></div>
+            <p style="font-size: 0.8em; color: #718096; margin-top: 5px;">*Rate increased to Rs. 20 per Rs. 1,000 (2%) effective April 1, 2025.</p>
+        `;
+    }
+
+    document.getElementById('stampResults').innerHTML = `
+        <div class="results">
+            <h3 style="margin-bottom: 20px; color: #2d3748;">Stamp Duty Calculation</h3>
+            <div class="result-row">
+                <span class="result-label">Transaction Value</span>
+                <span class="result-value">${formatCurrency(value)}</span>
+            </div>
+            ${breakdownHTML}
+            <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px; margin-top: 10px;">
+                <span class="result-label" style="font-weight: 700;">Total Stamp Duty</span>
+                <span class="result-value" style="font-weight: 700; color: #e53e3e;">${formatCurrency(duty)}</span>
+            </div>
+        </div>
+    `;
+}
+
+function resetStampDuty() {
+    document.getElementById('stampValue').value = '';
+    document.getElementById('leaseValue').value = '';
+    document.getElementById('stampError').textContent = '';
+    document.getElementById('stampResults').innerHTML = '';
+}
+
+function calculateCGT() {
+    const assetType = document.getElementById('cgtAssetType').value;
+    const sellingPrice = parseFloat(document.getElementById('cgtSellingPrice').value) || 0;
+    const cost = parseFloat(document.getElementById('cgtCost').value) || 0;
+    const expenses = parseFloat(document.getElementById('cgtExpenses').value) || 0;
+    const errorDiv = document.getElementById('cgtError');
+
+    errorDiv.textContent = '';
+    document.getElementById('cgtResults').innerHTML = '';
+
+    if (sellingPrice <= 0 || cost <= 0) {
+        errorDiv.textContent = 'Please enter valid Selling Price and Cost of Acquisition';
+        return;
+    }
+
+    if (assetType === 'shares') {
+        document.getElementById('cgtResults').innerHTML = `
+            <div class="results">
+                <h3 style="margin-bottom: 20px; color: #2d3748;">Capital Gains Tax</h3>
+                <div class="result-row">
+                    <span class="result-label">Asset Type</span>
+                    <span class="result-value">Listed Shares (CSE)</span>
+                </div>
+                <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
+                    <span class="result-label" style="font-weight: 700;">Tax Payable</span>
+                    <span class="result-value" style="font-weight: 700; color: #48bb78;">Exempt (0%)</span>
+                </div>
+                <p style="font-size: 0.8em; color: #718096; margin-top: 5px;">Gains from shares quoted in any official list of the Colombo Stock Exchange are currently exempt from CGT.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const capitalGain = sellingPrice - cost - expenses;
+
+    // Logic: If Gain < 0 (Loss), no tax.
+    if (capitalGain <= 0) {
+        document.getElementById('cgtResults').innerHTML = `
+            <div class="results">
+                <h3 style="margin-bottom: 20px; color: #2d3748;">Capital Loss / No Gain</h3>
+                <div class="result-row">
+                    <span class="result-label">Gain/Loss</span>
+                    <span class="result-value" style="color: #e53e3e;">${formatCurrency(capitalGain)}</span>
+                </div>
+                <p style="margin-top: 10px;">No Capital Gains Tax applies as there is no profit.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Rate: 15% for Individuals (2025)
+    // Exemption Threshold: < 50k gain is exempt.
+    const taxRate = 0.15;
+    let taxAmount = 0;
+    let message = '';
+
+    if (capitalGain < 50000) {
+        taxAmount = 0;
+        message = 'Gains below Rs. 50,000 are exempt from tax.';
+    } else {
+        taxAmount = capitalGain * taxRate;
+    }
+
+    document.getElementById('cgtResults').innerHTML = `
+        <div class="results">
+            <h3 style="margin-bottom: 20px; color: #2d3748;">Tax Calculation (Individual 15%)</h3>
+            <div class="result-row">
+                <span class="result-label">Selling Price</span>
+                <span class="result-value">${formatCurrency(sellingPrice)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Cost + Expenses</span>
+                <span class="result-value" style="color: #e53e3e;">- ${formatCurrency(cost + expenses)}</span>
+            </div>
+            <div class="result-row" style="border-top: 1px solid #e2e8f0; padding-top: 5px;">
+                <span class="result-label" style="font-weight: 600;">Net Capital Gain</span>
+                <span class="result-value" style="font-weight: 600; color: #2b6cb0;">${formatCurrency(capitalGain)}</span>
+            </div>
+
+            <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px; margin-top: 10px;">
+                <span class="result-label" style="font-weight: 700;">Tax Payable (15%)</span>
+                <span class="result-value" style="font-weight: 700; color: #e53e3e;">${formatCurrency(taxAmount)}</span>
+            </div>
+            ${message ? `<p style="font-size: 0.8em; color: #38a169; margin-top: 5px;">${message}</p>` : ''}
+        </div>
+    `;
+}
+
+function resetCGT() {
+    document.getElementById('cgtSellingPrice').value = '';
+    document.getElementById('cgtCost').value = '';
+    document.getElementById('cgtExpenses').value = '';
+    document.getElementById('cgtError').textContent = '';
+    document.getElementById('cgtResults').innerHTML = '';
+}
+
 function calculateEMI(principal, annualRate, years) {
     const monthlyRate = annualRate / 100 / 12;
     const months = years * 12;

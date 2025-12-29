@@ -35,6 +35,12 @@
             <div class="menu-item" onclick="showCalculator('epf')">
                 <i class="fas fa-coins"></i> EPF & ETF Calculator
             </div>
+            <div class="menu-item" onclick="showCalculator('stamp')">
+                <i class="fas fa-file-signature"></i> Stamp Duty
+            </div>
+            <div class="menu-item" onclick="showCalculator('cgt')">
+                <i class="fas fa-chart-line"></i> Capital Gains Tax
+            </div>
         </div>
     </div>
 
@@ -168,6 +174,83 @@
             </div>
 
             <div id="epfResults"></div>
+        </div>
+
+        <!-- Stamp Duty Calculator -->
+        <div id="stamp" class="calculator-card">
+            <h2 class="card-title">Stamp Duty Calculator (2025)</h2>
+            <p style="color: #718096; margin-bottom: 20px; font-size: 0.9em;">Calculate stamp duty for Property
+                Transfer, Gift Deeds, or Lease Agreements.</p>
+
+            <div class="form-group">
+                <label>Transaction Type</label>
+                <select id="stampType" onchange="updateStampUI()">
+                    <option value="buy">Buying Property (Deed of Transfer)</option>
+                    <option value="gift">Gifting Property (Deed of Gift)</option>
+                    <option value="lease">Lease Agreement (Rent)</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="stampValueGroup">
+                <label>Property Value (LKR)</label>
+                <input type="number" id="stampValue" placeholder="Enter property value" min="0">
+            </div>
+
+            <div class="form-group" id="leasePeriodGroup" style="display: none;">
+                <label>Total Lease Value (LKR)</label>
+                <input type="number" id="leaseValue" placeholder="Monthly Rent × Months" min="0">
+                <small style="color: #718096; display: block; margin-top: 5px;">Enter the total rent payable for the
+                    full period.</small>
+            </div>
+
+            <div id="stampError" class="error"></div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateStampDuty()">Calculate Stamp Duty</button>
+                <button class="btn btn-secondary" onclick="resetStampDuty()">Reset</button>
+            </div>
+
+            <div id="stampResults"></div>
+        </div>
+
+        <!-- Capital Gains Tax Calculator -->
+        <div id="cgt" class="calculator-card">
+            <h2 class="card-title">Capital Gains Tax (2025)</h2>
+            <p style="color: #718096; margin-bottom: 20px; font-size: 0.9em;">Calculate tax on profit from selling
+                investment assets (Land, Buildings, Unlisted Shares).</p>
+
+            <div class="form-group">
+                <label>Asset Type</label>
+                <select id="cgtAssetType" onchange="resetCGT()">
+                    <option value="property">Property / Land (Investment)</option>
+                    <option value="shares">Stocks / Shares (Listed CSE)</option>
+                    <option value="other">Other Investment Assets</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Selling Price (LKR)</label>
+                <input type="number" id="cgtSellingPrice" placeholder="Value realized" min="0">
+            </div>
+
+            <div class="form-group">
+                <label>Cost of Acquisition (LKR)</label>
+                <input type="number" id="cgtCost" placeholder="Purchase price + improvements" min="0">
+            </div>
+
+            <div class="form-group">
+                <label>Incidental Expenses (LKR)</label>
+                <input type="number" id="cgtExpenses" placeholder="Legal fees, agents fees, etc." min="0">
+            </div>
+
+            <div id="cgtError" class="error"></div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateCGT()">Calculate Tax</button>
+                <button class="btn btn-secondary" onclick="resetCGT()">Reset</button>
+            </div>
+
+            <div id="cgtResults"></div>
         </div>
 
         <!-- Leasing Calculator -->
