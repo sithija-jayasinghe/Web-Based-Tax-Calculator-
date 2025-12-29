@@ -1,3 +1,17 @@
+function toggleMobileMenu() {
+    const menuSection = document.querySelector('.menu-section');
+    menuSection.classList.toggle('show');
+
+    const icon = document.querySelector('.mobile-nav-toggle i');
+    if (menuSection.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+}
+
 function showCalculator(id) {
     const cards = document.querySelectorAll('.calculator-card');
     const menuItems = document.querySelectorAll('.menu-item');
@@ -6,7 +20,15 @@ function showCalculator(id) {
     menuItems.forEach(item => item.classList.remove('active'));
 
     document.getElementById(id).classList.add('active');
-    event.target.closest('.menu-item').classList.add('active');
+    if (event && event.target.closest('.menu-item')) {
+        event.target.closest('.menu-item').classList.add('active');
+    }
+
+    // Close mobile menu on selection if open
+    const menuSection = document.querySelector('.menu-section');
+    if (menuSection.classList.contains('show')) {
+        toggleMobileMenu();
+    }
 }
 
 

@@ -29,6 +29,10 @@ body {
     margin-bottom: 20px;
 }
 
+.mobile-nav-toggle {
+    display: none;
+}
+
 .menu-section {
     margin-bottom: 30px;
 }
@@ -294,10 +298,29 @@ select:focus {
     .logo {
         padding: 16px 20px;
         font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 5px;
     }
 
     .menu-section {
         padding: 8px 12px 18px;
+        display: none;
+    }
+
+    .menu-section.show {
+        display: block;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .menu-item {
@@ -357,5 +380,41 @@ select:focus {
     input[type="number"], select {
         padding: 12px 14px;
         font-size: 15px;
+    }
+}
+
+/* Footer Styles */
+.footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    color: #718096;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+.footer .developed-by {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.footer .disclaimer {
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #a0aec0;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 20px;
+        margin-top: 30px;
+    }
+    
+    .footer .disclaimer {
+        font-size: 11px;
     }
 }
