@@ -40,17 +40,13 @@ function calculateWithholding() {
             message = 'No tax applicable. Amount is below Rs. 100,000';
         }
     } else if (taxType === 'interest') {
-        tax = amount * 0.05;
-        taxRate = 5;
-        message = 'Bank interest tax applies at 5%';
+        tax = amount * 0.10;
+        taxRate = 10;
+        message = 'Bank interest tax applies at 10% (effective April 1, 2025)';
     } else if (taxType === 'dividend') {
-        if (amount > 100000) {
-            tax = amount * 0.14;
-            taxRate = 14;
-            message = 'Dividend tax applies at 14% for amounts above Rs. 100,000';
-        } else {
-            message = 'No tax applicable. Amount is below Rs. 100,000';
-        }
+        tax = amount * 0.15;
+        taxRate = 15;
+        message = 'Dividend tax applies at 15% (final tax, effective from Jan 1, 2023)';
     }
 
     const netAmount = amount - tax;
