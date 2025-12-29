@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tax Calculator - Sri Lanka</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -32,6 +32,9 @@
             <div class="menu-item" onclick="showCalculator('leasing')">
                 <i class="fas fa-car"></i> Leasing Calculator
             </div>
+            <div class="menu-item" onclick="showCalculator('epf')">
+                <i class="fas fa-coins"></i> EPF & ETF Calculator
+            </div>
         </div>
     </div>
 
@@ -39,7 +42,7 @@
         <div class="header">
             <h1>Tax Calculator </h1>
             <h2>Calculate Tax on Your Income & Transactions</h2>
-            <p>Calculate the taxable amount for income earned, considering the revised tax rates by ICET</p>
+            <p>Calculate the taxable amount for income earned, considering the revised tax rates by 2025</p>
         </div>
 
         <!-- Withholding Tax Calculator -->
@@ -147,6 +150,26 @@
             <div id="vatResults"></div>
         </div>
 
+        <!-- EPF & ETF Calculator -->
+        <div id="epf" class="calculator-card">
+            <h2 class="card-title">EPF & ETF Calculator</h2>
+            <p style="color: #718096; margin-bottom: 20px; font-size: 0.9em;">Calculate Employee Provident Fund (8% /
+                12%) and Trust Fund (3%) contributions.</p>
+
+            <div class="form-group">
+                <label>Basic Salary (for EPF/ETF)</label>
+                <input type="number" id="epfSalary" placeholder="Enter basic salary + allowances" min="0">
+                <div id="epfError" class="error"></div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" onclick="calculateEPF()">Calculate Contributions</button>
+                <button class="btn btn-secondary" onclick="resetEPF()">Reset</button>
+            </div>
+
+            <div id="epfResults"></div>
+        </div>
+
         <!-- Leasing Calculator -->
         <div id="leasing" class="calculator-card">
             <h2 class="card-title">Leasing Calculator</h2>
@@ -182,7 +205,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

@@ -398,6 +398,76 @@ function resetVAT() {
     document.getElementById('vatResults').innerHTML = '';
 }
 
+function calculateEPF() {
+    const salary = parseFloat(document.getElementById('epfSalary').value);
+    const errorDiv = document.getElementById('epfError');
+
+    errorDiv.textContent = '';
+
+    if (!salary || salary <= 0) {
+        errorDiv.textContent = 'Please enter a valid salary greater than 0';
+        return;
+    }
+
+    // EPF Rates
+    const employeeEpfRate = 0.08; // 8% deducted from employee
+    const employerEpfRate = 0.12; // 12% contribution by employer
+    const employerEtfRate = 0.03; // 3% contribution by employer (ETF)
+
+    // Calculations
+    const employeeEpf = salary * employeeEpfRate;
+    const employerEpf = salary * employerEpfRate;
+    const employerEtf = salary * employerEtfRate;
+
+    // Totals
+    const totalEmployerContribution = employerEpf + employerEtf;
+    const totalEpfBalance = employeeEpf + employerEpf; // Total going into EPF account monthly
+
+    document.getElementById('epfResults').innerHTML = `
+        <div class="results">
+            <h3 style="margin-bottom: 20px; color: #2d3748;">Contribution Breakdown</h3>
+            
+            <h4 style="color: #2d3748; margin-top: 15px; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Employee Share (Deducted)</h4>
+            <div class="result-row">
+                <span class="result-label">EPF (8%)</span>
+                <span class="result-value" style="color: #e53e3e;">- ${formatCurrency(employeeEpf)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label" style="font-weight: 600;">Net Balance from Basic</span>
+                <span class="result-value" style="font-weight: 600;">${formatCurrency(salary - employeeEpf)}</span>
+            </div>
+
+            <h4 style="color: #2d3748; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Employer Share (Benefits)</h4>
+            <div class="result-row">
+                <span class="result-label">EPF Contribution (12%)</span>
+                <span class="result-value" style="color: #48bb78;">${formatCurrency(employerEpf)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">ETF Contribution (3%)</span>
+                <span class="result-value" style="color: #48bb78;">${formatCurrency(employerEtf)}</span>
+            </div>
+             <div class="result-row" style="padding-top: 5px;">
+                <span class="result-label" style="font-weight: 600;">Total Employer Cost</span>
+                <span class="result-value" style="font-weight: 600; color: #e53e3e;">${formatCurrency(salary + totalEmployerContribution)}</span>
+            </div>
+
+            <div style="margin-top: 25px; padding-top: 15px; border-top: 2px solid #e2e8f0; background-color: #f7fafc; padding: 15px; border-radius: 8px;">
+                <div class="result-row">
+                    <span class="result-label" style="font-weight: 700; color: #2d3748;">Total Monthly EPF Savings</span>
+                    <span class="result-value" style="font-weight: 700; color: #2b6cb0;">${formatCurrency(totalEpfBalance)}</span>
+                </div>
+                 <p style="text-align: right; font-size: 0.8em; color: #718096; margin-top: 5px;">(8% Employee + 12% Employer)</p>
+            </div>
+        </div>
+    `;
+}
+
+function resetEPF() {
+    document.getElementById('epfSalary').value = '';
+    document.getElementById('epfError').textContent = '';
+    document.getElementById('epfResults').innerHTML = '';
+}
+
 function calculateEMI(principal, annualRate, years) {
     const monthlyRate = annualRate / 100 / 12;
     const months = years * 12;
