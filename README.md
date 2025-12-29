@@ -1,4 +1,4 @@
-# 💰 TaxCalc LK - Sri Lanka Tax Calculator
+# TaxCalc LK - Sri Lanka Tax Calculator
 
 A comprehensive web-based tax calculator application for Sri Lanka, featuring multiple tax calculation modules with a modern, user-friendly interface.
 
@@ -8,7 +8,7 @@ A comprehensive web-based tax calculator application for Sri Lanka, featuring mu
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -22,26 +22,26 @@ A comprehensive web-based tax calculator application for Sri Lanka, featuring mu
 - [License](#license)
 - [Author](#author)
 
-## 🌟 Overview
+## Overview
 
 TaxCalc LK is a modern, responsive web application designed to help individuals and businesses in Sri Lanka calculate various types of taxes accurately. The application features an intuitive interface with dark mode support and smooth animations, making tax calculations simple and efficient.
 
 **Tax rates are effective from 01.04.2025**
 
-## ✨ Features
+## Features
 
-- 🧮 **5 Comprehensive Tax Calculators**
-- 🌓 **Dark Mode Support** with theme persistence
-- 📱 **Fully Responsive Design** (Mobile, Tablet, Desktop)
-- ✅ **Real-time Input Validation**
-- 📊 **Detailed Tax Breakdown Tables**
-- 💫 **Smooth Animations and Transitions**
-- 🔄 **Easy Reset Functionality**
-- 💾 **LocalStorage Theme Preference**
-- 🎨 **Modern UI/UX Design**
-- ⚡ **Fast and Lightweight**
+- **5 Comprehensive Tax Calculators**
+- **Dark Mode Support** with theme persistence
+- **Fully Responsive Design** (Mobile, Tablet, Desktop)
+- **Real-time Input Validation**
+- **Detailed Tax Breakdown Tables**
+- **Smooth Animations and Transitions**
+- **Easy Reset Functionality**
+- **LocalStorage Theme Preference**
+- **Modern UI/UX Design**
+- **Fast and Lightweight**
 
-## 🧮 Tax Calculators
+## Tax Calculators
 
 ### 1. Withholding Tax Calculator
 Calculate withholding tax for:
@@ -119,7 +119,7 @@ N = Number of months
 - Total interest and payment breakdown
 - Savings comparison insights
 
-## 💻 Usage
+## Usage
 
 ### Basic Usage
 
@@ -177,7 +177,7 @@ Output:
 - Total Interest: Rs. 195,714.08
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 taxcalc-lk/
@@ -213,7 +213,7 @@ taxcalc-lk/
 - Progressive tax calculations
 - EMI formula implementation
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **HTML5** - Structure and semantics
 - **CSS3** - Styling and animations
@@ -228,7 +228,7 @@ taxcalc-lk/
   - Event Handling
   - Mathematical Calculations
 
-## 🎨 Color Palette
+## Color Palette
 
 - Primary: `#ff6b35` (Orange)
 - Background: `#f5f7fa` (Light Gray)
@@ -236,7 +236,7 @@ taxcalc-lk/
 - Text: `#0a1128` (Dark Navy)
 - Sidebar: `#0a1128` (Dark Navy)
 
-## 🧪 Testing
+## Testing
 
 ### Browser Compatibility
 ✅ Chrome 90+
@@ -258,7 +258,7 @@ taxcalc-lk/
 - [ ] Reset buttons clear all data
 - [ ] Navigation works correctly
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Here's how you can help:
 
@@ -284,28 +284,28 @@ Contributions are welcome! Here's how you can help:
 - Update documentation if needed
 ```
 
-## 👨‍💻 Author
+## Author
 
 Harshana Jayasinghe
 
-- 🎓 University of COlombo School of Computing
-- 📧 Email: harshanajayasinghe113@gmail.com
-- 🐱 GitHub: https://github.com/sithija-jayasinghe
-- 💼 LinkedIn: https://www.linkedin.com/in/sithija-harshana-jayasinghe-552822340/
+- University of COlombo School of Computing
+- Email: harshanajayasinghe113@gmail.com
+- GitHub: https://github.com/sithija-jayasinghe
+- LinkedIn: https://www.linkedin.com/in/sithija-harshana-jayasinghe-552822340/
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Institute of Computer Engineering Technology for the project requirements
 - Sri Lankan tax regulations and guidelines
 - Modern web development best practices
 - Open source community for inspiration
 
-## 📞 Support
+## Support
 
 For support, questions, or feedback:
-- 📧 Email: your.email@example.com
+- Email: your.email@example.com
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Add tax history tracking
 - [ ] Export results as PDF
@@ -317,7 +317,7 @@ For support, questions, or feedback:
 - [ ] Tax comparison tools
 - [ ] Mobile app version
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This calculator is provided for educational and informational purposes only. Tax calculations are based on the rates effective from 01.04.2025. Always consult with a qualified tax professional or the Inland Revenue Department of Sri Lanka for official tax advice and calculations.
 

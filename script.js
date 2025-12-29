@@ -1,10 +1,10 @@
 function showCalculator(id) {
     const cards = document.querySelectorAll('.calculator-card');
     const menuItems = document.querySelectorAll('.menu-item');
-    
+
     cards.forEach(card => card.classList.remove('active'));
     menuItems.forEach(item => item.classList.remove('active'));
-    
+
     document.getElementById(id).classList.add('active');
     event.target.closest('.menu-item').classList.add('active');
 }
@@ -12,16 +12,16 @@ function showCalculator(id) {
 
 
 function formatCurrency(amount) {
-    return 'Rs. ' + amount.toLocaleString('en-LK', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return 'Rs. ' + amount.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function calculateWithholding() {
     const amount = parseFloat(document.getElementById('whtAmount').value);
     const taxType = document.querySelector('input[name="taxType"]:checked').value;
     const errorDiv = document.getElementById('whtError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!amount || amount <= 0) {
         errorDiv.textContent = 'Please enter a valid amount greater than 0';
         return;
@@ -91,9 +91,9 @@ function resetWithholding() {
 function calculatePayable() {
     const salary = parseFloat(document.getElementById('monthlySalary').value);
     const errorDiv = document.getElementById('payableError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!salary || salary <= 0) {
         errorDiv.textContent = 'Please enter a valid salary greater than 0';
         return;
@@ -194,9 +194,9 @@ function resetPayable() {
 function calculateIncome() {
     const income = parseFloat(document.getElementById('annualIncome').value);
     const errorDiv = document.getElementById('incomeError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!income || income <= 0) {
         errorDiv.textContent = 'Please enter a valid income greater than 0';
         return;
@@ -297,9 +297,9 @@ function resetIncome() {
 function calculateSSCL() {
     const value = parseFloat(document.getElementById('ssclValue').value);
     const errorDiv = document.getElementById('ssclError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!value || value <= 0) {
         errorDiv.textContent = 'Please enter a valid value greater than 0';
         return;
@@ -351,13 +351,13 @@ function resetSSCL() {
 function calculateEMI(principal, annualRate, years) {
     const monthlyRate = annualRate / 100 / 12;
     const months = years * 12;
-    
+
     if (monthlyRate === 0) {
         return principal / months;
     }
-    
-    const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / 
-                (Math.pow(1 + monthlyRate, months) - 1);
+
+    const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+        (Math.pow(1 + monthlyRate, months) - 1);
     return emi;
 }
 
@@ -366,19 +366,19 @@ function calculateLeasing() {
     const rate = parseFloat(document.getElementById('interestRate').value);
     const years = parseInt(document.getElementById('loanYears').value);
     const errorDiv = document.getElementById('leasingError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!amount || amount <= 0) {
         errorDiv.textContent = 'Please enter a valid loan amount greater than 0';
         return;
     }
-    
+
     if (!rate || rate <= 0) {
         errorDiv.textContent = 'Please enter a valid interest rate greater than 0';
         return;
     }
-    
+
     if (years > 5) {
         errorDiv.textContent = 'Loan period cannot exceed 5 years';
         return;
@@ -423,14 +423,14 @@ function showComparison() {
     const amount = parseFloat(document.getElementById('loanAmount').value);
     const rate = parseFloat(document.getElementById('interestRate').value);
     const errorDiv = document.getElementById('leasingError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!amount || amount <= 0) {
         errorDiv.textContent = 'Please enter a valid loan amount greater than 0';
         return;
     }
-    
+
     if (!rate || rate <= 0) {
         errorDiv.textContent = 'Please enter a valid interest rate greater than 0';
         return;
@@ -510,7 +510,7 @@ function showComparison() {
             </div>
 
             <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; border: 2px solid #e2e8f0;">
-                <h4 style="color: #2d3748; margin-bottom: 15px;">💡 Comparison Insights</h4>
+                <h4 style="color: #2d3748; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Comparison Insights</h4>
                 <ul style="color: #4a5568; line-height: 1.8; padding-left: 20px;">
                     <li>Shorter loan periods have higher monthly payments but lower total interest</li>
                     <li>3-year plan saves you ${formatCurrency(interest5 - interest3)} compared to 5-year plan</li>
