@@ -220,40 +220,48 @@ function calculateIncome() {
         return;
     }
 
+    // Personal relief: Rs. 1,800,000 per year (effective April 1, 2025)
+    const annualRelief = 1800000;
+
+    // Calculate taxable income after relief
+    const taxableIncome = Math.max(0, income - annualRelief);
+
+    // New tax brackets (2025): After relief, progressive rates apply
+    // 1M @ 6%, 500K @ 18%, 500K @ 24%, 500K @ 30%, balance @ 36%
     const brackets = [
-        { limit: 1200000, rate: 0 },
-        { limit: 1700000, rate: 0.06 },
-        { limit: 2200000, rate: 0.12 },
-        { limit: 2700000, rate: 0.18 },
-        { limit: 3200000, rate: 0.24 },
-        { limit: 3700000, rate: 0.30 },
+        { limit: 1000000, rate: 0.06 },
+        { limit: 500000, rate: 0.18 },
+        { limit: 500000, rate: 0.24 },
+        { limit: 500000, rate: 0.30 },
         { limit: Infinity, rate: 0.36 }
     ];
 
     let tax = 0;
-    let remaining = income;
+    let remaining = taxableIncome;
     let breakdown = [];
-    let prevLimit = 0;
+    let cumulativeTaxable = 0;
 
     for (let i = 0; i < brackets.length; i++) {
         if (remaining <= 0) break;
 
-        const bracketSize = brackets[i].limit - prevLimit;
-        const taxableInBracket = Math.min(remaining, bracketSize);
+        const taxableInBracket = Math.min(remaining, brackets[i].limit);
         const taxInBracket = taxableInBracket * brackets[i].rate;
 
         if (taxableInBracket > 0) {
+            const rangeStart = cumulativeTaxable;
+            const rangeEnd = cumulativeTaxable + brackets[i].limit;
+
             breakdown.push({
-                range: `Rs. ${prevLimit.toLocaleString()} - Rs. ${brackets[i].limit === Infinity ? 'Above' : brackets[i].limit.toLocaleString()}`,
+                range: `Rs. ${rangeStart.toLocaleString()} - Rs. ${brackets[i].limit === Infinity ? 'Above' : rangeEnd.toLocaleString()}`,
                 rate: (brackets[i].rate * 100).toFixed(0) + '%',
                 taxable: formatCurrency(taxableInBracket),
                 tax: formatCurrency(taxInBracket)
             });
             tax += taxInBracket;
+            cumulativeTaxable += brackets[i].limit;
         }
 
         remaining -= taxableInBracket;
-        prevLimit = brackets[i].limit;
     }
 
     const netIncome = income - tax;
@@ -262,7 +270,7 @@ function calculateIncome() {
         <table class="breakdown-table">
             <thead>
                 <tr>
-                    <th>Income Range</th>
+                    <th>Taxable Income Range</th>
                     <th>Rate</th>
                     <th>Taxable Amount</th>
                     <th>Tax</th>
@@ -286,20 +294,33 @@ function calculateIncome() {
 
     document.getElementById('incomeResults').innerHTML = `
         <div class="results">
-            <h3 style="margin-bottom: 20px; color: #2d3748;">Tax Breakdown</h3>
-            ${tableHTML}
-            <div style="margin-top: 25px;">
+            <h3 style="margin-bottom: 20px; color: #2d3748;">Tax Breakdown (Effective April 1, 2025)</h3>
+            <div class="result-row">
+                <span class="result-label">Annual Income</span>
+                <span class="result-value">${formatCurrency(income)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Less: Personal Relief</span>
+                <span class="result-value" style="color: #48bb78;">- ${formatCurrency(annualRelief)}</span>
+            </div>
+            <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
+                <span class="result-label">Taxable Income</span>
+                <span class="result-value">${formatCurrency(taxableIncome)}</span>
+            </div>
+            ${taxableIncome > 0 ? `
+            <div style="margin-top: 20px;">
+                <h4 style="color: #2d3748; margin-bottom: 10px;">Progressive Tax Calculation:</h4>
+                ${tableHTML}
+            </div>
+            ` : '<p style="margin-top: 15px; color: #48bb78; font-weight: 600;">No tax applicable - income is below the tax-free threshold.</p>'}
+            <div style="margin-top: 25px; padding-top: 15px; border-top: 2px solid #e2e8f0;">
                 <div class="result-row">
-                    <span class="result-label">Annual Income</span>
-                    <span class="result-value">${formatCurrency(income)}</span>
+                    <span class="result-label" style="font-weight: 700;">Total Annual Tax</span>
+                    <span class="result-value" style="font-weight: 700; color: #e53e3e;">${formatCurrency(tax)}</span>
                 </div>
                 <div class="result-row">
-                    <span class="result-label">Total Annual Tax</span>
-                    <span class="result-value">${formatCurrency(tax)}</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Net Annual Income</span>
-                    <span class="result-value">${formatCurrency(netIncome)}</span>
+                    <span class="result-label" style="font-weight: 700;">Net Annual Income</span>
+                    <span class="result-value" style="font-weight: 700; color: #48bb78;">${formatCurrency(netIncome)}</span>
                 </div>
             </div>
         </div>
