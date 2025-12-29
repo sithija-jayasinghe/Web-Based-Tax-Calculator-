@@ -109,6 +109,29 @@ body {
 
 .calculator-card.active {
     display: block;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .card-title {
@@ -203,6 +226,7 @@ select:focus {
     background: #f7fafc;
     border-radius: 8px;
     border-left: 4px solid #ff6b35;
+    animation: fadeInUp 0.4s ease-out;
 }
 
 .result-row {
@@ -314,12 +338,17 @@ select:focus {
     }
 
     .menu-section {
-        padding: 8px 12px 18px;
-        display: none;
+        padding: 0 12px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease-in-out;
+        opacity: 0;
     }
 
     .menu-section.show {
-        display: block;
+        padding: 8px 12px 18px;
+        max-height: 600px;
+        opacity: 1;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
