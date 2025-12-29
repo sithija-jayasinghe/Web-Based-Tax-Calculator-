@@ -334,60 +334,49 @@ function resetIncome() {
 }
 
 function calculateVAT() {
-    const amount = parseFloat(document.getElementById('vatAmount').value);
-    const vatType = document.querySelector('input[name="vatType"]:checked').value;
+    const value = parseFloat(document.getElementById('vatAmount').value);
     const errorDiv = document.getElementById('vatError');
-    
+
     errorDiv.textContent = '';
-    
-    if (!amount || amount <= 0) {
-        errorDiv.textContent = 'Please enter a valid amount greater than 0';
+
+    if (!value || value <= 0) {
+        errorDiv.textContent = 'Please enter a valid value greater than 0';
         return;
     }
 
-    const vatRate = 0.15; // 15% VAT in Sri Lanka
-    let vatAmount, priceExclusive, priceInclusive;
-    let calculationType;
-
-    if (vatType === 'add') {
-        // Add VAT to price (Exclusive → Inclusive)
-        priceExclusive = amount;
-        vatAmount = amount * vatRate;
-        priceInclusive = amount + vatAmount;
-        calculationType = 'Adding VAT to Price';
-    } else {
-        // Extract VAT from price (Inclusive → Exclusive)
-        priceInclusive = amount;
-        priceExclusive = amount / (1 + vatRate);
-        vatAmount = amount - priceExclusive;
-        calculationType = 'Extracting VAT from Price';
-    }
+    const saleTax = value * 0.025;
+    const afterSaleTax = value + saleTax;
+    const vat = afterSaleTax * 0.15;
+    const totalSSCL = saleTax + vat;
+    const finalAmount = value + totalSSCL;
 
     document.getElementById('vatResults').innerHTML = `
         <div class="results">
-            <h3 style="margin-bottom: 20px; color: #2d3748;">${calculationType}</h3>
+            <h3 style="margin-bottom: 20px; color: #2d3748;">SSCL Calculation Breakdown</h3>
             <div class="result-row">
-                <span class="result-label">VAT Rate</span>
-                <span class="result-value">15%</span>
-            </div>
-            <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
-                <span class="result-label">Price (VAT Exclusive)</span>
-                <span class="result-value">${formatCurrency(priceExclusive)}</span>
+                <span class="result-label">Original Value</span>
+                <span class="result-value">${formatCurrency(value)}</span>
             </div>
             <div class="result-row">
-                <span class="result-label">VAT Amount (15%)</span>
-                <span class="result-value" style="color: #e53e3e;">${formatCurrency(vatAmount)}</span>
+                <span class="result-label">Sale Tax (2.5%)</span>
+                <span class="result-value">${formatCurrency(saleTax)}</span>
             </div>
-            <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
-                <span class="result-label" style="font-weight: 700;">Price (VAT Inclusive)</span>
-                <span class="result-value" style="font-weight: 700; color: #2d3748;">${formatCurrency(priceInclusive)}</span>
+            <div class="result-row">
+                <span class="result-label">Value After Sale Tax</span>
+                <span class="result-value">${formatCurrency(afterSaleTax)}</span>
             </div>
-            <p style="margin-top: 15px; color: #718096; font-style: italic;">
-                ${vatType === 'add' 
-                    ? `If you sell an item for ${formatCurrency(priceExclusive)}, you need to charge ${formatCurrency(priceInclusive)} including VAT.`
-                    : `The price ${formatCurrency(priceInclusive)} includes ${formatCurrency(vatAmount)} VAT. The base price is ${formatCurrency(priceExclusive)}.`
-                }
-            </p>
+            <div class="result-row">
+                <span class="result-label">VAT (15% on ${formatCurrency(afterSaleTax)})</span>
+                <span class="result-value">${formatCurrency(vat)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total SSCL (Sale Tax + VAT)</span>
+                <span class="result-value">${formatCurrency(totalSSCL)}</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Final Amount Payable</span>
+                <span class="result-value">${formatCurrency(finalAmount)}</span>
+            </div>
         </div>
     `;
 }

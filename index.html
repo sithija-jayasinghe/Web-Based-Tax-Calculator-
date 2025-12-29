@@ -26,8 +26,8 @@
             <div class="menu-item" onclick="showCalculator('income')">
                 <i class="fas fa-chart-line"></i> Income Tax (Annual)
             </div>
-            <div class="menu-item" onclick="showCalculator('sscl')">
-                <i class="fas fa-store"></i> SSCL Tax
+            <div class="menu-item" onclick="showCalculator('vat')">
+                <i class="fas fa-receipt"></i> VAT Calculator
             </div>
             <div class="menu-item" onclick="showCalculator('leasing')">
                 <i class="fas fa-car"></i> Leasing Calculator
@@ -114,22 +114,37 @@
             <div id="incomeResults"></div>
         </div>
 
-        <!-- SSCL Tax Calculator -->
-        <div id="sscl" class="calculator-card">
-            <h2 class="card-title">SSCL Tax Calculator</h2>
+        <!-- VAT Calculator -->
+        <div id="vat" class="calculator-card">
+            <h2 class="card-title">VAT Calculator (15%)</h2>
 
             <div class="form-group">
-                <label>Transaction Value (LKR)</label>
-                <input type="number" id="ssclValue" placeholder="Enter transaction value" min="0">
-                <div id="ssclError" class="error"></div>
+                <label>Calculation Type</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="addVat" name="vatType" value="add" checked>
+                        <label for="addVat" style="margin: 0;">Add VAT to Price (Exclusive → Inclusive)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="extractVat" name="vatType" value="extract">
+                        <label for="extractVat" style="margin: 0;">Extract VAT from Price (Inclusive →
+                            Exclusive)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label id="vatAmountLabel">Amount (LKR)</label>
+                <input type="number" id="vatAmount" placeholder="Enter amount" min="0">
+                <div id="vatError" class="error"></div>
             </div>
 
             <div>
-                <button class="btn btn-primary" onclick="calculateSSCL()">Calculate SSCL</button>
-                <button class="btn btn-secondary" onclick="resetSSCL()">Reset</button>
+                <button class="btn btn-primary" onclick="calculateVAT()">Calculate VAT</button>
+                <button class="btn btn-secondary" onclick="resetVAT()">Reset</button>
             </div>
 
-            <div id="ssclResults"></div>
+            <div id="vatResults"></div>
         </div>
 
         <!-- Leasing Calculator -->
