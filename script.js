@@ -337,15 +337,15 @@ function calculateVAT() {
     const amount = parseFloat(document.getElementById('vatAmount').value);
     const vatType = document.querySelector('input[name="vatType"]:checked').value;
     const errorDiv = document.getElementById('vatError');
-    
+
     errorDiv.textContent = '';
-    
+
     if (!amount || amount <= 0) {
         errorDiv.textContent = 'Please enter a valid amount greater than 0';
         return;
     }
 
-    const vatRate = 0.15; // 15% VAT in Sri Lanka
+    const vatRate = 0.18; // 18% VAT in Sri Lanka (effective Jan 1, 2024)
     let vatAmount, priceExclusive, priceInclusive;
     let calculationType;
 
@@ -368,14 +368,14 @@ function calculateVAT() {
             <h3 style="margin-bottom: 20px; color: #2d3748;">${calculationType}</h3>
             <div class="result-row">
                 <span class="result-label">VAT Rate</span>
-                <span class="result-value">15%</span>
+                <span class="result-value">18%</span>
             </div>
             <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
                 <span class="result-label">Price (VAT Exclusive)</span>
                 <span class="result-value">${formatCurrency(priceExclusive)}</span>
             </div>
             <div class="result-row">
-                <span class="result-label">VAT Amount (15%)</span>
+                <span class="result-label">VAT Amount (18%)</span>
                 <span class="result-value" style="color: #e53e3e;">${formatCurrency(vatAmount)}</span>
             </div>
             <div class="result-row" style="border-top: 2px solid #e2e8f0; padding-top: 10px;">
@@ -383,10 +383,10 @@ function calculateVAT() {
                 <span class="result-value" style="font-weight: 700; color: #2d3748;">${formatCurrency(priceInclusive)}</span>
             </div>
             <p style="margin-top: 15px; color: #718096; font-style: italic;">
-                ${vatType === 'add' 
-                    ? `If you sell an item for ${formatCurrency(priceExclusive)}, you need to charge ${formatCurrency(priceInclusive)} including VAT.`
-                    : `The price ${formatCurrency(priceInclusive)} includes ${formatCurrency(vatAmount)} VAT. The base price is ${formatCurrency(priceExclusive)}.`
-                }
+                ${vatType === 'add'
+            ? `If you sell an item for ${formatCurrency(priceExclusive)}, you need to charge ${formatCurrency(priceInclusive)} including VAT.`
+            : `The price ${formatCurrency(priceInclusive)} includes ${formatCurrency(vatAmount)} VAT. The base price is ${formatCurrency(priceExclusive)}.`
+        }
             </p>
         </div>
     `;
